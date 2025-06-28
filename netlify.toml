@@ -1,0 +1,11 @@
+[build]
+  functions = ".netlify/functions"
+
+[functions]
+  external_node_modules = ["@google/generative-ai"]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

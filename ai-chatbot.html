@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="The Mental Health Awareness Organization (Mind-Haven Org) helps spread awareness and shed light to different mental health problems, the various ways to cope with them, how to help others who might be struggling, and how to spread awareness yourself.">
+    <meta name="keywords" content="Mental, Health, Awareness, Help, Depression, Anxiety, PTSD, AI, Chatbot, Emotional Support">
+    <meta name="author" content="Madyar Kozhakhmetov">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap link below -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- FontAwesome link below -->
+    <script src="https://use.fontawesome.com/5d5a7b196b.js"></script>
+    <!-- Google Fonts link below -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"> 
+    <!-- Favicon link below -->
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <title>Mind-Haven Emotional AI Chatbot</title>
+    
+    <style>
+        /* Import existing CSS variables and base styles */
+        * {
+            color: #000000;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Existing header styles */
+        #custom-nav-css {
+            border-bottom: 1px solid #000000;
+            position: relative;
+            z-index: 1000;
+            background-color: #ffffff;
+        }
+
+        .navbar-brand img {
+            height: 33px;
+            width: 33px;
+        }
+
+        .mha-nav { 
+            color: #000000 !important;
+            font-weight: 600;
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+        }
+
+        .mha-nav:hover, .mha-nav:hover span {
+            color: #FF6347 !important;
+        } 
+
+        .mha-active, .mha-active span {
+            color: #FF6347 !important;
+        }
+
+        a.mha-active:hover, a.mha-active:hover span {
+            color: #FF4500 !important;
+        }
+
+        #mha-navbar-right-space {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        /* Footer styles */
+        .black-background { 
+            height: 75px;
+            background-color: #000000;
+            width: 100%;
+        }
+
+        footer {
+            background-color: #000000;
+            position: relative;
+            z-index: 1000;
+        }
+
+        footer div {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .top-footer, .bottom-footer {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #000000;
+        }
+
+        .top-footer {
+            padding-top: 15px;
+            border-top: 1px solid rgba(128,128,128,0.35);
+            border-bottom: 1px solid rgba(128,128,128,0.35);
+            padding-bottom: 15px;
+        }
+
+        .bottom-footer {
+            padding-top: 15px;
+            padding-bottom: 75px;
+        }
+
+        .top-left .bottom-left {
+            background-color: #000000;
+            float: left;
+        }
+
+        .top-right, .bottom-right {
+            background-color: #000000;
+            float: right;
+        }
+
+        #flag {
+            background-color: #000000;
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+        }
+
+        .top-left {
+            background-color: #000000;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .top-right {
+            margin-top: -30px;
+            background-color: #000000;
+        }
+
+        .top-right i {
+            margin-right: 10px;
+            margin-left: 10px;
+            background-color: #000000;
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .bottom-left {
+            background-color: #000000;
+            color: #737373;
+            font-size: 14px;
+        }
+
+        .bottom-right {
+            background-color: #000000;
+            text-align: right;
+            margin-right: 10px;
+            margin-top: -25px;
+            letter-spacing: 0.5px;
+        }
+
+        .bottom-right span {
+            color: #ffffff;
+            text-align: right;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* CHATBOT PAGE - PREMIUM DESIGN */
+        body {
+            background: #000000;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        }
+
+        /* Animated Background */
+        .chatbot-container {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(217, 70, 239, 0.2) 0%, transparent 50%),
+                        linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            background-size: 100% 100%;
+            animation: backgroundShift 15s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating particles */
+        .chatbot-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(139, 92, 246, 0.4), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(6, 182, 212, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(217, 70, 239, 0.4), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(139, 92, 246, 0.3), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: particleFloat 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-200px) rotate(360deg); }
+        }
+
+        .chatbot-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 200px);
+            position: relative;
+        }
+
+        /* Main Chat Container with INSANE Neon Border */
+        .chat-box {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            height: 80vh;
+            border-radius: 32px;
+            overflow: hidden;
+            filter: drop-shadow(0 25px 80px rgba(139, 92, 246, 0.6));
+        }
+
+        /* MEGA NEON ANIMATED BORDER */
+        .chat-box::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            background: linear-gradient(45deg, 
+                #8b5cf6, #06b6d4, #d946ef, #3b82f6,
+                #f59e0b, #ef4444, #10b981, #8b5cf6);
+            background-size: 800% 800%;
+            border-radius: 38px;
+            z-index: -1;
+            animation: megaNeonPulse 4s ease-in-out infinite;
+            filter: blur(2px);
+        }
+
+        .chat-box::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, 
+                #8b5cf6, #06b6d4, #d946ef, #3b82f6,
+                #f59e0b, #ef4444, #10b981, #8b5cf6);
+            background-size: 400% 400%;
+            border-radius: 35px;
+            z-index: -1;
+            animation: megaNeonPulse 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes megaNeonPulse {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: blur(2px) brightness(1);
+            }
+            25% {
+                background-position: 100% 50%;
+                filter: blur(3px) brightness(1.5);
+            }
+            50% { 
+                background-position: 200% 50%;
+                filter: blur(4px) brightness(2);
+            }
+            75% {
+                background-position: 300% 50%;
+                filter: blur(3px) brightness(1.5);
+            }
+        }
+
+        /* Premium Glassmorphism Interior */
+        .chat-interior {
+            background: rgba(8, 8, 15, 0.95);
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+                0 50px 100px rgba(0, 0, 0, 0.8);
+            height: 100%;
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Sexy Header with Gradient */
+        .chat-header {
+            padding: 2rem 2.5rem 1.5rem;
+            background: linear-gradient(135deg, 
+                rgba(139, 92, 246, 0.2) 0%, 
+                rgba(6, 182, 212, 0.15) 50%,
+                rgba(217, 70, 239, 0.2) 100%);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+            position: relative;
+        }
+
+        .chat-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8), transparent);
+        }
+
+        .chat-header h1 {
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            letter-spacing: -0.5px;
+        }
+
+        .chat-subtitle {
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            margin-top: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Messages Container with Custom Scrollbar */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 2.5rem;
+            scroll-behavior: smooth;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .messages-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #a78bfa, #0891b2);
+        }
+
+        /* Premium Message Bubbles */
+        .message {
+            margin-bottom: 2rem;
+            display: flex;
+            animation: messageSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 1.5rem 2rem;
+            border-radius: 28px;
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            word-wrap: break-word;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #8b5cf6, #d946ef);
+            color: #ffffff;
+            border-bottom-right-radius: 8px;
+            box-shadow: 
+                0 20px 40px rgba(139, 92, 246, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .message.bot .message-bubble {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(31, 41, 55, 0.9));
+            color: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-bottom-left-radius: 8px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Typing Indicator with More Style */
+        .typing-indicator {
+            display: none;
+            justify-content: flex-start;
+            margin-bottom: 2rem;
+            animation: messageSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .typing-bubble {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(31, 41, 55, 0.9));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 1.5rem 2rem;
+            border-radius: 28px;
+            border-bottom-left-radius: 8px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 50%;
+            animation: typingPulse 1.4s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingPulse {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* SEXY Input Area */
+        .input-area {
+            padding: 2rem 2.5rem 2.5rem;
+            background: linear-gradient(135deg, 
+                rgba(139, 92, 246, 0.1) 0%, 
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(6, 182, 212, 0.1) 100%);
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+            position: relative;
+        }
+
+        .input-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8), transparent);
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(8, 8, 15, 0.8);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            border-radius: 28px;
+            padding: 1rem 1.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 
+                inset 0 2px 8px rgba(0, 0, 0, 0.5),
+                0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-container:focus-within {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+            box-shadow: 
+                inset 0 2px 8px rgba(0, 0, 0, 0.5),
+                0 20px 60px rgba(139, 92, 246, 0.4),
+                0 0 0 4px rgba(139, 92, 246, 0.1);
+        }
+
+        #messageInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            letter-spacing: 0.3px;
+        }
+
+        #messageInput::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+        }
+
+        /* AMAZING Send Button */
+        #sendButton {
+            background: linear-gradient(135deg, #8b5cf6, #d946ef);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-left: 1.5rem;
+            box-shadow: 
+                0 8px 25px rgba(139, 92, 246, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #sendButton::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        #sendButton:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 
+                0 15px 40px rgba(139, 92, 246, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        #sendButton:hover::before {
+            left: 100%;
+        }
+
+        #sendButton:active {
+            transform: scale(1.05) translateY(-1px);
+        }
+
+        #sendButton:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+        }
+
+        #sendButton i {
+            color: white;
+            font-size: 1.3rem;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Welcome Message Redesign */
+        .welcome-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .welcome-message h2 {
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-message p {
+            font-family: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        /* Responsive Design */
+        @media only screen and (max-width: 768px) {
+            .chat-box {
+                width: 95%;
+                height: 85vh;
+                border-radius: 28px;
+            }
+
+            .chat-box::before, .chat-box::after {
+                border-radius: 31px;
+            }
+
+            .chat-interior {
+                border-radius: 28px;
+            }
+
+            .chat-header {
+                padding: 1.5rem 2rem 1rem;
+            }
+
+            .chat-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .messages-container {
+                padding: 1.5rem 2rem;
+            }
+
+            .input-area {
+                padding: 1.5rem 2rem 2rem;
+            }
+
+            .message-bubble {
+                max-width: 85%;
+                padding: 1.25rem 1.75rem;
+                font-size: 0.95rem;
+            }
+
+            .welcome-message {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .welcome-message h2 {
+                font-size: 1.6rem;
+            }
+
+            #sendButton {
+                width: 52px;
+                height: 52px;
+                margin-left: 1rem;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .chatbot-main {
+                padding: 1rem 0.5rem;
+            }
+
+            .chat-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .chat-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .input-container {
+                padding: 0.8rem 1.25rem;
+                border-radius: 24px;
+            }
+
+            #messageInput {
+                font-size: 1rem;
+            }
+
+            #sendButton {
+                width: 48px;
+                height: 48px;
+                margin-left: 0.75rem;
+            }
+
+            .welcome-message h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg my-0 navbar-light" id="custom-nav-css">
+        <div class="container-fluid"> 
+            <a class="navbar-brand" id="custom-navbar-brand-mobile-responsiveness" href="index.html">
+                <img src="assets/images/hugging.png" class="d-inline-block align-top" alt="Mental Health Awareness Organization logo" loading="lazy">
+                Mind-Haven
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="nav navbar-nav mx-auto">
+                    <li><a class="nav-link mha-nav" href="educate-yourself.html">Educate Yourself</a></li>
+                    <li><a class="nav-link mha-nav" href="help-yourself.html">Help Yourself</a></li>
+                    <li><a class="nav-link mha-nav" href="help-others.html">Help Others</a></li>
+                    <li><a class="nav-link mha-nav" href="spread-the-word.html">Spread the Word</a></li>
+                    <li><a class="nav-link mha-nav active mha-active" href="ai-chatbot.html">AI Support</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="nav-link mha-nav" href="sign-in.html">Sign In <span id="mha-navbar-right-space"> | </span> Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+    </header>
+
+    <div class="chatbot-container">
+        <main class="chatbot-main">
+            <div class="chat-box">
+                <div class="chat-interior">
+                    <div class="chat-header">
+                        <h1>🧠 Emotional AI Support</h1>
+                        <p class="chat-subtitle">Your compassionate AI companion for mental health support</p>
+                    </div>
+                    
+                    <div class="messages-container" id="messagesContainer">
+                        <div class="welcome-message">
+                            <h2>✨ Welcome to Your Safe Space</h2>
+                            <p>I'm here to listen, support, and provide guidance for your mental health journey.</p>
+                            <p>Feel free to share what's on your mind - I'm here to help. 💜</p>
+                        </div>
+                    </div>
+
+                    <div class="typing-indicator" id="typingIndicator">
+                        <div class="typing-bubble">
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-area">
+                        <div class="input-container">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                placeholder="Share what's on your mind..."
+                                maxlength="500"
+                            >
+                            <button id="sendButton" type="button">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="black-background"></div>
+        <div class="top-footer">
+            <div class="top-left">
+                <img src="assets/images/us-flag.png" id="flag" alt="Flag of the United States of America." loading="lazy">
+                English
+            </div>
+            <div class="top-right">
+                <a href="https://twitter.com/" target="_blank" aria-label="Link to the Twitter home page"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" aria-label="Link to the Facebook home page"><i class="fa fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Link to the Instagram home page"><i class="fa fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="bottom-footer">
+            <div class="bottom-left">
+                © 2024 Mental Health Awareness Organization
+            </div>
+            <div class="bottom-right">
+                <span>Privacy Notice</span><br>
+                <span>Terms of Service</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Javascript bundle -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <script>
+        // NO API KEY HERE! IT'S SECURELY ON A SERVERLESS FUNCTION.
+    
+        // DOM Elements
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const typingIndicator = document.getElementById('typingIndicator');
+    
+        let conversationHistory = [];
+        let isProcessing = false;
+    
+        // System prompt will be sent to our secure function
+        const systemPrompt = `You are an empathetic AI counselor specializing in mental health support. Your role is to:
+        1. Provide compassionate, non-judgmental emotional support.
+        2. Listen actively and validate feelings.
+        3. Offer practical coping strategies and mindfulness techniques.
+        4. Recognize signs of crisis and provide appropriate resources.
+        5. Encourage professional help when needed.
+        6. Use warm, understanding language.
+        7. Ask thoughtful follow-up questions.
+        8. Provide hope and encouragement.
+        Guidelines:
+        - Always be supportive and non-judgmental.
+        - Validate emotions and experiences.
+        - Offer specific, actionable advice when appropriate.
+        - Recognize your limitations as an AI.
+        - Encourage professional help for serious issues.
+        - Use emojis sparingly but meaningfully.
+        - Keep responses concise but meaningful (2-4 sentences typically).
+        - If you detect a user is in immediate crisis (mentioning self-harm, suicide), your *primary* and *immediate* response must be to provide crisis resources.
+        Remember: You're a supportive companion, not a replacement for professional therapy.`;
+    
+        // Event Listeners
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        sendButton.addEventListener('click', sendMessage);
+    
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message || isProcessing) return;
+    
+            setProcessing(true);
+            addMessageUI(message, 'user');
+            
+            // Add to history *before* sending, so the context is correct
+            conversationHistory.push({ role: 'user', parts: [{ text: message }] });
+    
+            messageInput.value = '';
+            showTypingIndicator();
+    
+            try {
+                const aiResponse = await getGeminiResponse(message);
+                hideTypingIndicator();
+                addMessageUI(aiResponse, 'bot');
+                // Add the AI's response to the history
+                conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
+                
+                // Keep conversation history manageable
+                if (conversationHistory.length > 20) {
+                    conversationHistory = conversationHistory.slice(-20);
+                }
+    
+            } catch (error) {
+                console.error('Error getting AI response:', error);
+                hideTypingIndicator();
+                addMessageUI("I'm sorry, I'm having trouble connecting right now. Please try again in a moment. If you're in crisis, please contact a mental health professional or crisis helpline immediately. 💜", 'bot');
+            }
+            setProcessing(false);
+        }
+        
+        // This is the only function that needs to change significantly
+        async function getGeminiResponse(userMessage) {
+            // This URL points to our new serverless function
+            const API_URL = '/.netlify/functions/chat';
+    
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    message: userMessage,
+                    history: conversationHistory.slice(0, -1), // Send history *before* the current user message
+                    systemPrompt: systemPrompt
+                })
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            return data.message;
+        }
+    
+        // Renamed to avoid confusion with conversation history management
+        function addMessageUI(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+            bubbleDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+            
+            messageDiv.appendChild(bubbleDiv);
+            
+            const welcomeMessage = messagesContainer.querySelector('.welcome-message');
+            if (welcomeMessage) welcomeMessage.remove();
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+    
+        // --- All your other utility functions (showTypingIndicator, etc.) remain the same ---
+        function showTypingIndicator() { /* ...your existing code... */ }
+        function hideTypingIndicator() { /* ...your existing code... */ }
+        function scrollToBottom() { /* ...your existing code... */ }
+        function setProcessing(processing) { /* ...your existing code... */ }
+        window.addEventListener('load', () => { /* ...your existing code... */ });
+        // ... (rest of your existing script)
+    
+        // PASTE THE REST OF YOUR UTILITY FUNCTIONS HERE
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'flex';
+            scrollToBottom();
+        }
+    
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+    
+        function scrollToBottom() {
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 100);
+        }
+    
+        function setProcessing(processing) {
+            isProcessing = processing;
+            sendButton.disabled = processing;
+            messageInput.disabled = processing;
+            if(!processing){
+                messageInput.focus();
+            }
+        }
+    
+        window.addEventListener('load', () => {
+            messageInput.focus();
+        });
+    </script>
+</body>
+</html>
