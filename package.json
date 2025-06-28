@@ -1,0 +1,11 @@
+{
+    "name": "mental-health-website",
+    "version": "1.0.0",
+    "description": "Mental health awareness website with AI chatbot",
+    "dependencies": {
+      "@google/generative-ai": "^0.15.0"
+    },
+    "engines": {
+      "node": ">=18.0.0"
+    }
+  }
